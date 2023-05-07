@@ -1,0 +1,566 @@
+
+/*============== RESET ==============*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+ul {
+    list-style: none;
+}
+
+/*============== VARIAVEIS ==============*/
+:root {
+    --header-height: 4.5rem;
+  
+    /* colors */
+    --hue: 120;
+    --hue2: 43;
+
+    /* 
+    color: hsl(130, 36%, 52%)
+    color: hsl(159, 36%, 52%);
+    color: hsl(43, 83%, 66%); */
+
+
+    /* HSL color mode */
+    --body-color: hsl(0 0% 98%);
+
+    --base-color: hsl(var(--hue) 36% 52%);
+    --base-color-second: hsl(var(--hue) 50% 90%);
+    --base-color-alt: hsl(var(--hue) 57% 53%);
+
+    --base-color-contrast: hsl(var(--hue2) 83% 66%);
+    --base-color-second-contrast: hsl(var(--hue2) 100% 90%);
+    --base-color-alt-contrast: hsl(var(--hue2) 57% 53%);
+
+    /*textos*/
+    --title-color: hsl(var(--hue) 41% 10%);
+    --text-color: hsl(0 0% 46%);
+    --text-color-light: hsl(0 0% 98%);    
+  }
+
+/*============== BASE: tudo que é padrão ==============*/
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font: 400 1 rem "DM Sans", sans-serif;
+    color: --text-color;
+    background-color: --body-color;
+    -webkit-font-smoothing: antialiased; /* webkit:motor de renderização  antialiased: deixa a fonte mais leve*/
+}
+
+.button {
+    background-color: var(--base-color);
+    color: var(--text-color-light);
+    height: 3.5rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 2rem;
+    border-radius: 0.25rem;
+    font: 500 1rem 'DM Sans', sans-serif;
+    transition: background 0.3s;
+}
+.button:hover {
+    background-color: var(--base-color-alt);
+    transition: width 0.2s; 
+}
+
+.button:hover::after{
+    transition: width 0.2s; 
+
+}
+
+.title {
+    font: 700 1.875rem "Poppins", sans-serif; /*carrega poppins, se nao sans-serif*/
+    color: --title-color;
+    -webkit-font-smoothing: auto;
+}
+
+.divider {
+    height: 2px;
+    background: linear-gradient(270deg, hsla(159, 36%,57%,1)0%, hsla(159, 65%, 88%, 0.34)100%);    
+}
+
+.divider2 {
+    height: 2px;
+    background: linear-gradient(270deg, hsla(159, 65%, 88%, 0.34), hsla(159, 36%,57%,1));    
+}
+
+/*============== LAYOUT ==============*/
+
+.grid {
+    display: grid;
+    gap: 2 rem;
+    
+    
+}
+
+.section {
+    padding: 5rem 0;
+    
+}
+
+.section .title {
+    margin-bottom: 1rem;
+}
+
+.section header {
+    margin-bottom: 4rem;
+}
+
+#header {
+    border-bottom: 1px solid rgb(177, 179, 178);
+    margin-bottom: 2rem;
+    display: flex;
+
+    background-color: var(--base-color) !important;
+   
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+
+}
+
+#header .scroll {
+    box-shadow: 0px 0px 12px black !important;
+}
+
+main {
+    
+    /*devido ao header estar position fixed o main subiu para o topo da pág
+    *demos uma margem que equivale a altura do header, por isso utilizamos essa variavel
+    *utilizamos o calc para comer a altura do header + a margem desejada a partir do header
+    */
+    margin-top: calc(var(--header-height) + 2rem);
+}
+
+/*============== NAV ==============*/
+
+/* nav {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   
+} */
+
+/* ESTILIZANDO O HOVER DO MENU */
+
+#header nav {
+    background-color: var(--base-color) !important;
+}
+
+nav .menu { 
+    margin-left: 5rem;
+}
+nav .items a {
+    transition: 0.3s !important;
+    position: relative;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    
+}
+
+nav .items a:hover {
+    color: var(--base-color-second) !important;
+
+}
+
+/* after fica com 0% de largura e as devidas estilizaões */
+nav .items a::after {
+    content: "";    
+    width: 0%;
+    height: 2px;
+    background: var(--base-color-second);
+
+    position: absolute;
+    left: 0;
+    bottom: 0rem;
+
+    transition: width 0.2s; 
+}
+
+/* after com hover fica 100%, ou seja, aparece */
+nav .items a:hover::after {
+    width: 100%;
+}
+
+nav .items {
+    text-align: center;
+    font: 700 1.2rem "Poppins", sans-serif; /*carrega poppins, se nao sans-serif*/
+    -webkit-font-smoothing: auto;
+}
+
+
+/*============== LOGO ==============*/
+
+.logo {
+    font: 700 1.31rem 'Poppins', sans-serif;
+    color: var(--title-color)
+}
+.logo span {
+    color: var(--base-color-contrast);
+}
+
+/*============== HOME ==============*/
+#home {
+    overflow: hidden;
+    
+
+}
+
+#home .container {
+    margin: auto;
+  
+}
+
+/* caixa imagem é pai da caixa sudoelement. A caixa pai estando como relative poderemos utilizar o sudo element como posição absoluta (em relação a caixa pai). */
+#home .imagem {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+/* sudo element */
+#home .imagem::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-color: var(--base-color-second);
+    position: absolute;
+    top: -8.30%;
+    left: 0%;
+    z-index: 0;
+
+}
+
+#home .imagem img {
+    position: relative;
+    right: 2.93rem;
+}
+
+#home .imagem::before,
+#home .imagem img {
+    border-radius: 0.25rem;
+}
+
+#home .text {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    text-align: center;
+
+}
+
+#home .text h1 {
+    margin-bottom: 1rem;
+}
+
+#home .text p {
+    margin-bottom: 2rem;
+    max-width: 100%;
+
+}
+
+/*============== ABOUT ==============*/
+#about {
+    background-color: white;
+}
+
+#about .container {
+    margin: auto;
+  
+}
+
+/* caixa imagem é pai da caixa sudoelement. A caixa pai estando como relative poderemos utilizar o sudo element como posição absoluta (em relação a caixa pai). */
+#about .imagem {
+    position: relative;
+    margin-bottom: 2rem;
+    margin-left: 4rem;
+    
+}
+
+/* sudo element */
+#about .imagem::before{
+    content: "" ;
+    height: 100% ;
+    width: 100% ;
+    background-color: var(--base-color-second) ;
+    position: absolute ;
+    top: -8.3% ;
+    left: -5% ;
+    z-index: 0 ;
+    
+
+
+}
+
+#about .imagem img {
+    position: relative;
+    
+}
+
+#about .imagem::before,
+#about .imagem img {
+    border-radius: 0.25rem;
+}
+
+#about .text {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+
+}
+
+#about .text h1 {
+    margin-bottom: 1rem;
+}
+
+#about .text p {
+    margin-bottom: 2rem;
+    max-width: 100%;
+
+}
+
+/*============== CARDS ==============*/
+
+.cards .grid {
+    gap: 1.5rem;    
+}
+
+.cardportas{
+    padding: 3,625rem 2rem !important;
+    box-shadow: 0 0 1em rgb(80, 80, 80);
+    border-radius:  0.25rem 0.25rem 0 0 !important;
+    border-bottom: 0.25rem solid var(--base-color) !important;
+    text-align: justify;
+
+}
+
+.cardportas .card-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+/*============== DEPOIMENTOS ==============*/
+
+#testimonials {
+    background: white;
+}
+
+#testimonials header {
+    margin-bottom: 0;
+}
+
+#testimonials .cards-testimonials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#testimonials blockquote{
+    padding: 2rem;
+    box-shadow: 0px 0px 12px  rgb(80, 80, 80);
+    border-radius: 0.25rem;
+}
+
+/*estilizando aspas*/
+#testimonials blockquote p{
+    position: relative;
+    text-indent: 1.875rem;
+    margin-bottom: 1.5rem;
+}
+#testimonials blockquote p span{
+    font: 700 3rem serif;
+    color: var(--base-color);
+    position: absolute;
+    top: -0.5rem;
+    left: -1.875rem;
+
+}
+
+/* SWIPER */
+.swiper-slide {
+    height: auto;
+    padding: 4rem 1rem;
+
+}
+
+.swiper-pagination-bullet-active{
+    background-color: var(--base-color);
+}
+
+/*============== CONTACT ==============*/
+
+#contact .grid {
+    gap: 2rem;
+
+}
+
+#contact i {
+    color: var(--base-color);
+    font-size: 1.5 rem;
+}
+
+/*============== FOOTER ==============*/
+.footer {
+    background-color: var(--base-color);
+}
+
+footer .logo {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+footer .brand{
+    color: var(--text-color-light);
+    margin-bottom: 0.75rem;
+}
+
+
+footer i {
+    font-size: 1.5rem;
+    color: var(--text-color-light);
+}
+
+footer .social a {
+    margin-right: 1rem;
+    margin-left: 1rem;
+    transition: 0.3s;
+    display: inline-block;
+}
+footer .social a:hover {
+    transform: translateY(-10px);
+}
+
+
+/*============== VOLTAR AO TOPO ==============*/
+.topo {
+    background-color: var(--base-color);
+    color: var(--text-color-light);
+
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+
+    padding: 0.3rem;
+    clip-path: circle();
+
+    font-size: 1.5rem;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: 0.3s;
+    transform: translateY(100%) ;
+}
+.topo .show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/*============== RESPONSIVIDADE ==============*/
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1120px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /*HOME*/
+    #home .container {
+        grid-auto-flow: column;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    #home .imagem {
+        order: 1;
+    }
+
+    #home .text {
+        order: 0;
+        max-width: 24rem;
+        text-align: left;
+    }
+
+    /* sudo element */
+    #home .imagem::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-color: var(--base-color-second);
+    position: absolute;
+    top: -10%;
+    left: 0%;
+    z-index: 0;
+}
+
+    /*ABOUT*/
+
+    #about .container {
+        margin: 0 auto;
+        grid-auto-flow: column;
+
+    }
+
+    #about .imagem {
+        margin-top: 3rem;
+        max-width: 1120px;
+    }
+    
+    #about .imagem::before{
+        content: "" ;
+        height: 60% ;
+        width: 100% ;
+        background-color: var(--base-color-second) ;
+        position: absolute ;
+        top: -8.3% ;
+        left: -5% ;
+        z-index: 0 ; 
+    
+    }
+    
+}
+
+@media (min-width: 992px) {
+    .title {
+        font-size: 2.2rem;
+    }
+
+    #testimonials .cards-testimonials {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    #testimonials .form {       
+
+        width: 50%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
